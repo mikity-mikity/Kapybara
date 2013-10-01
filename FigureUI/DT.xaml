@@ -15,6 +15,7 @@
             <RadioButton Checked="RadioButton_Checked">0.1</RadioButton>
             <RadioButton Checked="RadioButton_Checked" x:Name="Default">0.2</RadioButton>
             <RadioButton Checked="RadioButton_Checked">0.4</RadioButton>
+            <RadioButton Checked="RadioButton_Checked">0.8</RadioButton>
         </DockPanel>
     </StackPanel>
 </UserControl>

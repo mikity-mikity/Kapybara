@@ -1966,10 +1966,10 @@ namespace mikity.ghComponents
                     //vel[P1 * 3 + 1] = (y - pos[P1, 1]) / dt / 10d;
                     //pos[P1, 0] = vel[P1 * 3 + 0] * dt;
                     //pos[P1, 1] = vel[P1 * 3 + 1] * dt;
-                    pos[P1, 0] = (x - pos[P1, 0])  + pos[P1, 0];
-                    pos[P1, 1] = (y - pos[P1, 1])  + pos[P1, 1];
-                    v.x = pos[P1, 0];
-                    v.y = pos[P1, 1];
+                    pos[P1, 0] = (x - pos[P1, 0]) / 10d + pos[P1, 0];
+                    pos[P1, 1] = (y - pos[P1, 1]) / 10d + pos[P1, 1];
+                    //v.x = pos[P1, 0];
+                    //v.y = pos[P1, 1];
                 }
             }
             if (!_isFixedBoundary)
@@ -2003,12 +2003,12 @@ namespace mikity.ghComponents
                         double y = (v.hf_begin.next.P.y + v.hf_end.P.y) / 2d;
                         //vel[P1 * 3 + 0] = (x - pos[P1, 0]) / dt / 1d;
                         //vel[P1 * 3 + 1] = (y - pos[P1, 1]) / dt / 1d;
-                        pos[P1, 0] = (x - pos[P1, 0])  + pos[P1, 0];
-                        pos[P1, 1] = (y - pos[P1, 1])  + pos[P1, 1];
+                        pos[P1, 0] = x;// (x - pos[P1, 0]) + pos[P1, 0];
+                        pos[P1, 1] = y;// (y - pos[P1, 1]) + pos[P1, 1];
                         //pos[P1, 0] += vel[P1 * 3 + 0] * dt;
                         //pos[P1, 1] += vel[P1 * 3 + 1] * dt;
-                        v.x = pos[P1, 0];
-                        v.y = pos[P1, 1];
+                        //v.x = pos[P1, 0];
+                        //v.y = pos[P1, 1];
                     }
                 }
             }
