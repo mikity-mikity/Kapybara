@@ -572,7 +572,7 @@ namespace mikity.ghComponents
 
             if (_m == __bm1)
             {
-                //projectBoundary();
+                projBoundary();
             }
             if (_m == __bm2)
             {
