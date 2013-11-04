@@ -197,7 +197,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>Copy "$(TargetDir)ghKapybara.dll" "$(TargetDir)merge\ghKapybara.gha"
-Copy "$(TargetDir)Kapybara.dll" "$(TargetDir)merge\Kapybara.dll"
 Copy "$(TargetDir)FigureUI.dll" "$(TargetDir)merge\FigureUI.dll"
 Copy "$(TargetDir)Kapybara3D.dll" "$(TargetDir)merge\Kapybara3D.dll"
 Copy "$(TargetDir)Presentation*.dll" "$(TargetDir)merge\"

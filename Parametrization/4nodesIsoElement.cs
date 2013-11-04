@@ -9,23 +9,9 @@ namespace mikity.ghComponents
     /// <summary>
     /// Construct a point array using isoparametric shape functions.
     /// </summary>
-    public class four_nodes_isoelement : Grasshopper.Kernel.GH_Component
+ /*   public class four_nodes_isoelement : Grasshopper.Kernel.GH_Component
     {
-        /*protected override System.Drawing.Bitmap Icon
-        {
-            get
-            {
-                //現在のコードを実行しているAssemblyを取得
-                System.Reflection.Assembly myAssembly =
-                    System.Reflection.Assembly.GetExecutingAssembly();
 
-                System.IO.Stream st = myAssembly.GetManifestResourceStream("mikity.ghComponents.icons.four-nodes-fixed_nodes.bmp");
-                //指定されたマニフェストリソースを読み込む
-                System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(st);
-                return bmp;
-            }
-        }
-        */
         public four_nodes_isoelement()
             : base("4nodes->isoparametricElement", "4nodes->isoparametricElement", "4nodes->isoparametricElement", "Kapybara3D", "Basic Elements")
         {
@@ -127,4 +113,5 @@ namespace mikity.ghComponents
         }
 
     }
+  * */
 }

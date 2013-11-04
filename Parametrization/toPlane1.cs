@@ -4,13 +4,44 @@ using System.Linq;
 using System.Text;
 using ShoNS.Array;
 using Rhino.Geometry;
+using System.IO;
+using System.Reflection;
 namespace mikity.ghComponents
 {
+
     /// <summary>
     /// Construct a point array using isoparametric shape functions.
     /// </summary>
     public partial class toPlane1 : Grasshopper.Kernel.GH_Component
     {
+
+        static toPlane1()
+        {
+            var dir = Grasshopper.Folders.DefaultAssemblyFolder;
+
+            string assemblyDir = Path.GetDirectoryName(dir);
+            
+            if (File.Exists(Path.Combine(assemblyDir, "Kapybara.proxy.dll"))
+                || !File.Exists(Path.Combine(assemblyDir, "Kapybara.x86.dll"))
+                || !File.Exists(Path.Combine(assemblyDir, "Kapybara.x64.dll")))
+            {
+                throw new InvalidOperationException("Found Kapybara.dll which cannot exist. "
+                    + "Must instead have Kapybara.x86.dll and Kapybara.x64.dll. Check your build settings.");
+            }
+
+            AppDomain.CurrentDomain.AssemblyResolve += (_, e) =>
+            {
+                if (e.Name.StartsWith("Kapybara.proxy", StringComparison.OrdinalIgnoreCase))
+                {
+                    string fileName = Path.Combine(assemblyDir,
+                        string.Format("Kapybara.{0}.dll", (IntPtr.Size == 4) ? "x86" : "x64"));
+                    return Assembly.LoadFile(fileName);
+                }
+                return null;
+            };
+        }
+
+
         Func<double, double> Drift0 = (v) => { return 0.98; };
         Func<double, double> Drift1 = (v) => { /*if (v > 0)*/ return v / 20d + 0.95; /*else return 0.95;*/ };
         Func<double, double> Drift2 = (v) => { if (v >= 0)return 1.0; else return 0.0; };
@@ -31,6 +62,8 @@ namespace mikity.ghComponents
                     }
                 }
         */
+            
+
         public toPlane1()
             : base("pushSurface2Plane", "toPlanar", "Push Surface to x-y plane", "Kapybara3D", "Computation")
         {

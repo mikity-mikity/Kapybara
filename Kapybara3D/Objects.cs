@@ -5,10 +5,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ShoNS.Array;
+using System.IO;
+using System.Reflection;
 //using System.Reactive.Linq;
 namespace Kapybara3D
 {
 	namespace Objects{
+
 		public interface iObject
 		{
 		}

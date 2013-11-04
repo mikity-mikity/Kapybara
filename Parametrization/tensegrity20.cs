@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mikity.ghComponents
 {
-    public class tensegrity20 : Grasshopper.Kernel.GH_Component
+   /* public class tensegrity20 : Grasshopper.Kernel.GH_Component
     {
         static int nConstraints = 20;
         static int nParticles = nConstraints * 2;
@@ -42,21 +42,7 @@ namespace mikity.ghComponents
         double damping = 0.99, dt = 0.12;
         int __repeat = 20;
         int number = 0;
-        /*        protected override System.Drawing.Bitmap Icon
-                {
-                    get
-                    {
-                        //現在のコードを実行しているAssemblyを取得
-                        System.Reflection.Assembly myAssembly =
-                            System.Reflection.Assembly.GetExecutingAssembly();
 
-                        System.IO.Stream st = myAssembly.GetManifestResourceStream("mikity.ghComponents.icons.icon46.bmp");
-                        //指定されたマニフェストリソースを読み込む
-                        System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(st);
-                        return bmp;
-                    }
-                }
-        */
 
         private void initialize()
         {
@@ -561,5 +547,5 @@ namespace mikity.ghComponents
             });
         }
     }
-
+    */
 }
