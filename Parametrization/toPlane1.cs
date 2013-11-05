@@ -805,6 +805,8 @@ namespace mikity.ghComponents
         protected override void RegisterInputParams(Grasshopper.Kernel.GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddGenericParameter("Mesh/Surface", "m", "Mesh/Surface", Grasshopper.Kernel.GH_ParamAccess.item);
+            pManager.AddIntegerParameter("D1", "D1", "D1", Grasshopper.Kernel.GH_ParamAccess.item, 0);
+            pManager.AddIntegerParameter("D2", "D2", "D2", Grasshopper.Kernel.GH_ParamAccess.item, 0);
         }
 
         protected override void RegisterOutputParams(Grasshopper.Kernel.GH_Component.GH_OutputParamManager pManager)
@@ -1541,7 +1543,7 @@ namespace mikity.ghComponents
             Rhino.RhinoDoc.ReplaceRhinoObject += RhinoDoc_ReplaceRhinoObject;
         }
         System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-        public int P1 = 10, P2 = 20;
+        public int P1 = 10, P2 = 20, D1 = 0, D2 = 0;
         public int uDim, vDim;
         public int nU, nV;
         Rhino.Geometry.Mesh initializeNurbs(Rhino.Geometry.NurbsSurface S)
@@ -1751,8 +1753,8 @@ namespace mikity.ghComponents
         mikity.GeometryProcessing.MeshStructure meshStructure;
         private void firstActions()
         {
-            P1 = nParticles - 1;
-            P2 = 0;
+            P1 = nParticles - 1-D2;
+            P2 = 0+D1;
 
             Kapybara3D.Materials.harmonicMaterial hm = new Kapybara3D.Materials.harmonicMaterial();
             gS.setMaterial(hm.getMaterial());
@@ -1784,11 +1786,6 @@ namespace mikity.ghComponents
             Object inputGeometry = null;
             dbg = "";
             double area = 0;
-/*            if (!DA.GetData(1, ref dt))
-            {
-                isInitialized = false;
-                return;
-            }*/
             if (full != null) dt = full.getDt(); else dt = 0.1;
             if (_go == false)
             {
@@ -1813,6 +1810,10 @@ namespace mikity.ghComponents
                         isInitialized = false;
                         return;
                     }
+                    if (!DA.GetData(1, ref D1)) { D1 = 0; }
+                    if (!DA.GetData(2, ref D2)) { D2 = 0; }
+                    P1 = nParticles - 1 - D2;
+                    P2 = 0 + D1;
                     m = inputMesh.DuplicateMesh();
                     if (internalState == state.nurbs)
                     {
@@ -1878,6 +1879,10 @@ namespace mikity.ghComponents
             }
             else
             {
+                if (!DA.GetData(1, ref D1)) { D1 = 0; }
+                if (!DA.GetData(2, ref D2)) { D2 = 0; }
+                P1 = nParticles - 1 - D2;
+                P2 = 0 + D1;
                 reset = false;
                 sw.Reset();
                 int S = 0;
@@ -1889,7 +1894,6 @@ namespace mikity.ghComponents
                     __UPDATE();
                     gS.computeVolume(pos);
                     area = gS.getTotalVolume();
-                    //area = gS.getTotalVolume();
                     if (_isFixedBoundary == true)
                     {
                         if (fixedPointGuids == null)
@@ -2316,7 +2320,7 @@ namespace mikity.ghComponents
                 args.Display.DrawLines(bV, System.Drawing.Color.Red, 1);
                 args.Display.DrawLines(eVT, System.Drawing.Color.Cyan);
                 args.Display.DrawLines(eVC, System.Drawing.Color.Magenta);
-                if (mat == materialChoice.DCM)
+                if ((mat == materialChoice.DCM && Clock >= 0) || (InitialGuess == initialGuess.dcm && Clock == -1))
                 {
                     args.Display.DrawPoint(new Rhino.Geometry.Point3d(pos[P1, 0] + Shifting, pos[P1, 1], 0), Rhino.Display.PointStyle.X, 3, System.Drawing.Color.Red);
                     args.Display.DrawPoint(new Rhino.Geometry.Point3d(pos[P2, 0] + Shifting, pos[P2, 1], 0), Rhino.Display.PointStyle.X, 3, System.Drawing.Color.Red);
@@ -2377,7 +2381,7 @@ namespace mikity.ghComponents
                 args.Display.DrawLines(bV, System.Drawing.Color.Pink, 2);
                 args.Display.DrawLines(eVT, System.Drawing.Color.Cyan);
                 args.Display.DrawLines(eVC, System.Drawing.Color.Magenta);
-                if (mat == materialChoice.DCM)
+                if ((mat == materialChoice.DCM&&Clock>=0)||(InitialGuess==initialGuess.dcm&&Clock==-1))
                 {
                     args.Display.DrawPoint(new Rhino.Geometry.Point3d(pos[P1, 0] + Shifting, pos[P1, 1], 0), Rhino.Display.PointStyle.X, 3, System.Drawing.Color.Red);
                     args.Display.DrawPoint(new Rhino.Geometry.Point3d(pos[P2, 0] + Shifting, pos[P2, 1], 0), Rhino.Display.PointStyle.X, 3, System.Drawing.Color.Red);
