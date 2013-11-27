@@ -2,11 +2,37 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.IO;
+using System.Reflection;
 namespace mikity.ghComponents
 {
-   /* public class tensegrity20 : Grasshopper.Kernel.GH_Component
+    public class tensegrity20 : Grasshopper.Kernel.GH_Component
     {
+        static tensegrity20()
+        {
+            var dir = Grasshopper.Folders.DefaultAssemblyFolder;
+
+            string assemblyDir = Path.GetDirectoryName(dir);
+            
+            if (File.Exists(Path.Combine(assemblyDir, "Kapybara.proxy.dll"))
+                || !File.Exists(Path.Combine(assemblyDir, "Kapybara.x86.dll"))
+                || !File.Exists(Path.Combine(assemblyDir, "Kapybara.x64.dll")))
+            {
+                throw new InvalidOperationException("Found Kapybara.dll which cannot exist. "
+                    + "Must instead have Kapybara.x86.dll and Kapybara.x64.dll. Check your build settings.");
+            }
+
+            AppDomain.CurrentDomain.AssemblyResolve += (_, e) =>
+            {
+                if (e.Name.StartsWith("Kapybara.proxy", StringComparison.OrdinalIgnoreCase))
+                {
+                    string fileName = Path.Combine(assemblyDir,
+                        string.Format("Kapybara.{0}.dll", (IntPtr.Size == 4) ? "x86" : "x64"));
+                    return Assembly.LoadFile(fileName);
+                }
+                return null;
+            };
+        }
         static int nConstraints = 20;
         static int nParticles = nConstraints * 2;
         static int S1 = 40;
@@ -547,5 +573,4 @@ namespace mikity.ghComponents
             });
         }
     }
-    */
 }
