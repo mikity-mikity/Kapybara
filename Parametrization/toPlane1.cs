@@ -2167,7 +2167,7 @@ namespace mikity.ghComponents
                         double criteria = 0;
                         if (_conformal)
                         {
-                            criteria = ((vals[1] - vals[0]) * (vals[1] - vals[0])) / (vals[1] * vals[0]);
+                            criteria = ((vals[1] - vals[0]) * (vals[1] - vals[0])) / (vals[1] + vals[0]) * (vals[1] + vals[0]);
                         }
                         if (criteria > maxC) maxC = criteria;
                         if (criteria < minC) minC = criteria;
