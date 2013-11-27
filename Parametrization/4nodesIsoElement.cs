@@ -9,7 +9,7 @@ namespace mikity.ghComponents
     /// <summary>
     /// Construct a point array using isoparametric shape functions.
     /// </summary>
- /*   public class four_nodes_isoelement : Grasshopper.Kernel.GH_Component
+   public class four_nodes_isoelement : Grasshopper.Kernel.GH_Component
     {
 
         public four_nodes_isoelement()
@@ -113,5 +113,5 @@ namespace mikity.ghComponents
         }
 
     }
-  * */
+  
 }

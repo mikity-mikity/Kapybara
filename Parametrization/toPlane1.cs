@@ -811,14 +811,14 @@ namespace mikity.ghComponents
 
         protected override void RegisterOutputParams(Grasshopper.Kernel.GH_Component.GH_OutputParamManager pManager)
         {
-/*            pManager.AddIntegerParameter("iteration", "out", "out", Grasshopper.Kernel.GH_ParamAccess.item);
-            pManager.AddNumberParameter("a/A", "out", "out", Grasshopper.Kernel.GH_ParamAccess.item);
+            //pManager.AddIntegerParameter("iteration", "out", "out", Grasshopper.Kernel.GH_ParamAccess.item);
+            //pManager.AddNumberParameter("a/A", "out", "out", Grasshopper.Kernel.GH_ParamAccess.item);
             pManager.AddNumberParameter("maxC", "maxC", "maxC", Grasshopper.Kernel.GH_ParamAccess.item);
             pManager.AddNumberParameter("minC", "minC", "minC", Grasshopper.Kernel.GH_ParamAccess.item);
             pManager.AddNumberParameter("integral", "out4", "out4", Grasshopper.Kernel.GH_ParamAccess.item);
-            pManager.AddNumberParameter("area", "out5", "out5", Grasshopper.Kernel.GH_ParamAccess.item);
-            pManager.AddTextParameter("switches", "switches", "switches", Grasshopper.Kernel.GH_ParamAccess.item);
-            pManager.AddNumberParameter("damping", "damping", "damping", Grasshopper.Kernel.GH_ParamAccess.item);*/
+            //pManager.AddNumberParameter("area", "out5", "out5", Grasshopper.Kernel.GH_ParamAccess.item);
+            //pManager.AddTextParameter("switches", "switches", "switches", Grasshopper.Kernel.GH_ParamAccess.item);
+            //pManager.AddNumberParameter("damping", "damping", "damping", Grasshopper.Kernel.GH_ParamAccess.item);*/
         }
         public override void BakeGeometry(Rhino.RhinoDoc doc, Rhino.DocObjects.ObjectAttributes att, List<Guid> obj_ids)
         {
@@ -1951,6 +1951,9 @@ namespace mikity.ghComponents
                 }
                 dbg += "|F|=" + normW.ToString() + "\n";
                 full.setDbgText(dbg);
+                DA.SetData(0, maxC);
+                DA.SetData(1, minC);
+                DA.SetData(3, intC);
                 
             }
         }
