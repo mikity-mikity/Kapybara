@@ -815,7 +815,7 @@ namespace mikity.ghComponents
             //pManager.AddNumberParameter("a/A", "out", "out", Grasshopper.Kernel.GH_ParamAccess.item);
             pManager.AddNumberParameter("maxC", "maxC", "maxC", Grasshopper.Kernel.GH_ParamAccess.item);
             pManager.AddNumberParameter("minC", "minC", "minC", Grasshopper.Kernel.GH_ParamAccess.item);
-            pManager.AddNumberParameter("integral", "out4", "out4", Grasshopper.Kernel.GH_ParamAccess.item);
+            pManager.AddNumberParameter("integral", "intC", "out4", Grasshopper.Kernel.GH_ParamAccess.item);
             //pManager.AddNumberParameter("area", "out5", "out5", Grasshopper.Kernel.GH_ParamAccess.item);
             //pManager.AddTextParameter("switches", "switches", "switches", Grasshopper.Kernel.GH_ParamAccess.item);
             //pManager.AddNumberParameter("damping", "damping", "damping", Grasshopper.Kernel.GH_ParamAccess.item);*/
@@ -2170,7 +2170,7 @@ namespace mikity.ghComponents
                         double criteria = 0;
                         if (_conformal)
                         {
-                            criteria = ((vals[1] - vals[0]) * (vals[1] - vals[0])) / (vals[1] * vals[0]);
+                            criteria = ((vals[1] - vals[0]) * (vals[1] - vals[0])) / (vals[1] * vals[0])    ;
                         }
                         if (criteria > maxC) maxC = criteria;
                         if (criteria < minC) minC = criteria;
