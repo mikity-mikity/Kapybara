@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Grasshopper.Kernel.Data;
 using Grasshopper.Kernel.Types;
+using System.IO;
+using System.Reflection;
 namespace mikity.ghComponents
 {
     /// <summary>
@@ -11,7 +13,31 @@ namespace mikity.ghComponents
     /// </summary>
    public class four_nodes_isoelement : Grasshopper.Kernel.GH_Component
     {
+       static four_nodes_isoelement()
+        {
+            var dir = Grasshopper.Folders.DefaultAssemblyFolder;
 
+            string assemblyDir = Path.GetDirectoryName(dir);
+            
+            if (File.Exists(Path.Combine(assemblyDir, "Kapybara.proxy.dll"))
+                || !File.Exists(Path.Combine(assemblyDir, "Kapybara.x86.dll"))
+                || !File.Exists(Path.Combine(assemblyDir, "Kapybara.x64.dll")))
+            {
+                throw new InvalidOperationException("Found Kapybara.dll which cannot exist. "
+                    + "Must instead have Kapybara.x86.dll and Kapybara.x64.dll. Check your build settings.");
+            }
+
+            AppDomain.CurrentDomain.AssemblyResolve += (_, e) =>
+            {
+                if (e.Name.StartsWith("Kapybara.proxy", StringComparison.OrdinalIgnoreCase))
+                {
+                    string fileName = Path.Combine(assemblyDir,
+                        string.Format("Kapybara.{0}.dll", (IntPtr.Size == 4) ? "x86" : "x64"));
+                    return Assembly.LoadFile(fileName);
+                }
+                return null;
+            };
+        }
         public four_nodes_isoelement()
             : base("4nodes->isoparametricElement", "4nodes->isoparametricElement", "4nodes->isoparametricElement", "Kapybara3D", "Basic Elements")
         {
