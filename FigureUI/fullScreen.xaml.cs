@@ -21,6 +21,7 @@ namespace mikity.visualize
     {
         public void activate()
         {
+            this.Activate();
             this.view.Opacity = 1.0;
         }
         public void deactivate()
