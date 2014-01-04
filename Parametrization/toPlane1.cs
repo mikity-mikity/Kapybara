@@ -526,7 +526,7 @@ namespace mikity.ghComponents
             __ig23 = Menu_AppendItem(ttt.DropDown, "DHM (Rectangle)", Menu_InitialClicked);
             __ig3 = Menu_AppendItem(tt.DropDown, "DCM", Menu_InitialClicked);
             //__ig4 = Menu_AppendItem(tt.DropDown, "SCPL", Menu_InitialClicked);
-            __ig5 = Menu_AppendItem(tt.DropDown, "SCPS", Menu_InitialClicked);
+            __ig5 = Menu_AppendItem(tt.DropDown, "SCP", Menu_InitialClicked);
             tt = Menu_AppendItem(menu, "Optional features");
             __vf1 = Menu_AppendItem(tt.DropDown, "Show base vectors?", Menu_VisualClicked);
             __vf2 = Menu_AppendItem(tt.DropDown, "Show integrating points?", Menu_VisualClicked);
@@ -1944,7 +1944,7 @@ namespace mikity.ghComponents
                 dbg += "AreaRatio=" + (area / refArea).ToString() + "\n";
                 dbg += "Area=" + area.ToString() + "\n";
                 dbg += "refArea=" + refArea.ToString() + "\n";
-                if (_conformal)
+                //if (_conformal)
                 {
                     dbg += "max(Mc)=" + maxC.ToString() + "\n";
                     dbg += "min(Mc)=" + minC.ToString() + "\n";
@@ -2155,7 +2155,7 @@ namespace mikity.ghComponents
                     }
                 }
             }
-            if (_conformal)
+            //if (_conformal)
             {
                 maxC = 0;
                 minC = Double.MaxValue;
@@ -2168,7 +2168,7 @@ namespace mikity.ghComponents
                         e.getGlobalCoord(node, i);
                         weight = e.getEigenVectors(node2, vals, i);
                         double criteria = 0;
-                        if (_conformal)
+                        //if (_conformal)
                         {
                             criteria = ((vals[1] - vals[0]) * (vals[1] - vals[0])) / (vals[1] * vals[0])    ;
                         }
