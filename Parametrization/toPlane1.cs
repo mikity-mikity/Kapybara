@@ -339,7 +339,7 @@ namespace mikity.ghComponents
             full.resetGo();
             full.drift1();
             full.onFix();
-            full.onRF();
+            full.offRF();
             full.renewPlot(Drift1);
             full._selectMaterial = (s) => selectMaterial(s);
             full.initMaterial();
@@ -581,7 +581,7 @@ namespace mikity.ghComponents
         private bool _intPoint = true;
         private bool _isFixedBoundary;
         private bool _drift1 = true, _drift2 = false;
-        private bool _fixFlip = true, _RF = true;
+        private bool _fixFlip = true, _RF = false;
         private int shift = 0;
         private Kapybara3D.Materials.iMaterial _material = new Kapybara3D.Materials.stVenantMaterial();
         private void Menu_ShowParam(Object sender, EventArgs e)
@@ -778,6 +778,8 @@ namespace mikity.ghComponents
                 default:
                     return;
             }
+            ctime = 0;
+            iteration = 0;
             //reset = true;
             //this.ExpireSolution(true);
         }
@@ -1780,6 +1782,7 @@ namespace mikity.ghComponents
             isInitialized = true;
         }
         string dbg = "";
+        int ctime=0, iteration=0;
         protected override void SolveInstance(Grasshopper.Kernel.IGH_DataAccess DA)
         {
             Rhino.Geometry.NurbsSurface inputNurbs = null;
@@ -1885,10 +1888,12 @@ namespace mikity.ghComponents
                 P2 = 0 + D1;
                 reset = false;
                 sw.Reset();
+                
                 int S = 0;
                 do
                 {
                     S++;
+                    iteration++;
                     sw.Start();
                     Clock++;
                     __UPDATE();
@@ -1937,13 +1942,14 @@ namespace mikity.ghComponents
                     sw.Stop();
                     full.addNorm(normW);
                 } while (sw.ElapsedMilliseconds < 25);
-
+                ctime += (int)sw.ElapsedMilliseconds;
                 if (_eigen || _conformal) gS.computeEigenVectors();
                 __update();
-                dbg += "repeatCycle=" + S.ToString() + "\n";
-                dbg += "AreaRatio=" + (area / refArea).ToString() + "\n";
+                //dbg += "repeatCycle=" + S.ToString() + "\n";
+                //dbg += "AreaRatio=" + (area / refArea).ToString() + "\n";
+                dbg += "itr:" + iteration.ToString() + "  tCt:" + ctime.ToString() + "ms\n";
                 dbg += "Area=" + area.ToString() + "\n";
-                dbg += "refArea=" + refArea.ToString() + "\n";
+                //dbg += "refArea=" + refArea.ToString() + "\n";
                 //if (_conformal)
                 {
                     dbg += "max(Mc)=" + maxC.ToString() + "\n";
