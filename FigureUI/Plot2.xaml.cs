@@ -59,14 +59,15 @@ namespace mikity.visualize
                 maxY = maxY*0.9+d.Max()*0.1;
                 aMinY = d.Min();
             }
-            converterX = (v) => { return (v - minX) / 80d * 200d; };
+            /*converterX = (v) => { return (v - minX) / 80d * 200d; };
             converterY = (v) => { double f = -(v - minY) / (maxY - minY) * 80 + 90; return f; };
             Canvas.SetTop(min, converterY(aMinY)-min.ActualHeight);
             Canvas.SetLeft(min, converterX(minX));
             minLine.Y1 = converterY(aMinY);
             minLine.Y2 = converterY(aMinY);
+            */
             min.Content = minY.ToString("G3");
-            for (int i = 0; i < 80; i++)
+            /*for (int i = 0; i < 80; i++)
             {
                 lines[i].X1=converterX(i+minX);
                 if(i+minX>maxX)
@@ -86,7 +87,7 @@ namespace mikity.visualize
                 {
                     lines[i].Y2=converterY(vals[i+1+minX]);
                 }
-            }
+            }*/
         }
         Line[] lines = new Line[80];
         public Plot2()

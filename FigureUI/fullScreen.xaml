@@ -15,7 +15,7 @@
             <Style x:Key="T1" TargetType="Label">
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="FontWeight"   Value="Bold"/>
-                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="FontSize" Value="16"/>
                 <Setter Property="FontFamily" Value="Arial"/>
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="Width" Value="Auto"/>
