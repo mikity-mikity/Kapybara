@@ -371,6 +371,7 @@ namespace mikity.ghComponents
                     full.Close();
                     full = null;
                 }
+                deleteFixedPoints();
             }
         }
         public struct parameter
